@@ -5,6 +5,7 @@ on:
     branches: [starter-project]
     paths:
       - 'forge-website/**'
+  workflow_dispatch:
 
 jobs:
   deploy:
