@@ -1,0 +1,142 @@
+.footer {
+  background-color: var(--color-clay-soft);
+  border-top: 1px solid var(--color-clay-hairline);
+  padding-top: 64px;
+  padding-bottom: 40px;
+}
+
+.inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.top {
+  display: grid;
+  gap: 48px;
+  grid-template-columns: 1fr;
+  padding-bottom: 48px;
+  border-bottom: 1px solid var(--color-clay-hairline);
+  margin-bottom: 36px;
+}
+
+@media (min-width: 768px) {
+  .top {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 32px;
+  }
+}
+
+.brand {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-clay-ink);
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brandDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--color-clay-pink);
+  display: inline-block;
+}
+
+.brandTagline {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-clay-muted);
+  max-width: 260px;
+}
+
+.clutchBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: #fff;
+  border: 1px solid var(--color-clay-hairline);
+  border-radius: 10px;
+  padding: 8px 12px;
+  width: fit-content;
+  margin-top: 4px;
+}
+
+.clutchStars {
+  color: #ff4d4d;
+  font-size: 12px;
+  letter-spacing: -1px;
+}
+
+.clutchText {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-clay-muted);
+}
+
+.colTitle {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-clay-muted);
+  margin-bottom: 16px;
+}
+
+.colLinks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.colLink {
+  font-size: 14px;
+  color: var(--color-clay-copy);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.colLink:hover {
+  color: var(--color-clay-ink);
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.copy {
+  font-size: 13px;
+  color: var(--color-clay-muted);
+}
+
+.legalLinks {
+  display: flex;
+  gap: 20px;
+}
+
+.legalLink {
+  font-size: 13px;
+  color: var(--color-clay-muted);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.legalLink:hover {
+  color: var(--color-clay-ink);
+}
