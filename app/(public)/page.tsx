@@ -14,11 +14,14 @@ import {
   CheckCircle,
   ArrowRight,
   Phone,
+  Award,
+  BadgeCheck,
 } from 'lucide-react'
 import AgencyNav from '@/components/AgencyNav'
 import AgencyFooter from '@/components/AgencyFooter'
 import TechCursor from '@/components/ui/tech-cursor'
 import ExpandingCards from '@/components/ExpandingCards'
+import LeadForm from '@/components/LeadForm'
 
 /* ─── Data ─── */
 
@@ -50,7 +53,7 @@ const SERVICES = [
   {
     icon: Star,
     label: 'Review Management',
-    desc: 'Automated review requests that build your 5-star reputation on Clutch and Google — without lifting a finger.',
+    desc: 'Automated review requests that build your 5-star reputation on Google and Clutch — without lifting a finger.',
     color: 'ochre',
   },
   {
@@ -212,24 +215,36 @@ const SCORECARD_POINTS = [
   '114 verified Clutch reviews',
 ]
 
+/* ─── Reusable star row ─── */
+function StarRating({ count = 5 }: { count?: number }) {
+  return (
+    <div className="star-row" aria-label={`${count} out of 5 stars`} role="img">
+      {Array.from({ length: count }).map((_, i) => (
+        <Star key={i} size={14} fill="currentColor" aria-hidden="true" />
+      ))}
+    </div>
+  )
+}
+
 /* ─── Component ─── */
 
 export default function AgencyHomePage() {
   return (
     <>
+      <a href="#main-content" className="skip-link">Skip to main content</a>
       <TechCursor />
       <AgencyNav />
 
-      <div className="agency-page">
+      <div className="agency-page" id="main-content">
 
         {/* ── HERO ── */}
-        <section className="hero-section">
+        <section className="hero-section" aria-labelledby="hero-heading">
           <div className="hero-inner">
 
             <div className="hero-content">
               <span className="hero-eyebrow">Texas Home Services · Est. 2018</span>
 
-              <h1 className="hero-headline">
+              <h1 className="hero-headline" id="hero-heading">
                 More calls.<br />
                 More jobs.<br />
                 More revenue.
@@ -245,27 +260,27 @@ export default function AgencyHomePage() {
               <div className="hero-actions">
                 <a href="#contact" className="agency-btn-primary">
                   Get your free audit
-                  <ArrowRight size={16} />
+                  <ArrowRight size={16} aria-hidden="true" />
                 </a>
                 <a href="#results" className="btn-text-link">
                   See our results
-                  <ArrowRight size={14} />
+                  <ArrowRight size={14} aria-hidden="true" />
                 </a>
               </div>
 
-              <div className="hero-trust">
-                <span className="hero-trust-item">
-                  <span className="hero-trust-stars">★★★★★</span>
-                  4.9 · 114 Clutch reviews
+              <div className="hero-trust" role="list" aria-label="Trust indicators">
+                <span className="hero-trust-item" role="listitem">
+                  <StarRating />
+                  <span>4.9 · 114 Clutch reviews</span>
                 </span>
-                <span className="hero-trust-item">
-                  <CheckCircle size={15} />
+                <span className="hero-trust-item" role="listitem">
+                  <CheckCircle size={15} aria-hidden="true" />
                   Clutch Top Agency 2024
                 </span>
-                <span className="hero-trust-item">
-                  <Phone size={15} />
+                <a href="tel:+15125550190" className="hero-trust-item" aria-label="Call us at (512) 555-0190">
+                  <Phone size={15} aria-hidden="true" />
                   (512) 555-0190
-                </span>
+                </a>
               </div>
             </div>
 
@@ -287,49 +302,49 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── TRUST BAR ── */}
-        <div className="trust-bar">
+        <div className="trust-bar" role="complementary" aria-label="Company credentials">
           <div className="trust-bar-inner">
             <span className="trust-bar-item">
-              <span className="trust-bar-dot" />
+              <span className="trust-bar-dot" aria-hidden="true" />
               200+ Texas businesses served
             </span>
             <span className="trust-bar-item">
-              <span className="trust-bar-dot" />
+              <span className="trust-bar-dot" aria-hidden="true" />
               4.9★ on Clutch · 114 reviews
             </span>
             <span className="trust-bar-item">
-              <span className="trust-bar-dot" />
+              <span className="trust-bar-dot" aria-hidden="true" />
               One client per city, per trade
             </span>
             <span className="trust-bar-item">
-              <span className="trust-bar-dot" />
+              <span className="trust-bar-dot" aria-hidden="true" />
               Website live in 21 days, guaranteed
             </span>
             <span className="trust-bar-item">
-              <span className="trust-bar-dot" />
+              <span className="trust-bar-dot" aria-hidden="true" />
               ROI-positive or we work free
             </span>
           </div>
         </div>
 
         {/* ── SERVICES ── */}
-        <section className="agency-section" id="services">
+        <section className="agency-section" id="services" aria-labelledby="services-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">What we build</span>
-              <h2 className="section-title">The complete growth system</h2>
+              <h2 className="section-title" id="services-heading">The complete growth system</h2>
               <p className="section-sub">
                 Not just a website. A full lead generation machine — website, SEO,
                 ads, maps, reviews, and CRM working together as one.
               </p>
             </div>
 
-            <div className="services-grid">
+            <div className="services-grid" role="list">
               {SERVICES.map((service) => {
                 const Icon = service.icon
                 return (
-                  <div key={service.label} className={`feature-card feature-card--${service.color}`}>
-                    <div className="feature-card-icon">
+                  <div key={service.label} className={`feature-card feature-card--${service.color}`} role="listitem">
+                    <div className="feature-card-icon" aria-hidden="true">
                       <Icon size={22} />
                     </div>
                     <h3>{service.label}</h3>
@@ -342,28 +357,34 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── INDUSTRIES ── */}
-        <section className="agency-section--soft" id="industries">
+        <section className="agency-section--soft" id="industries" aria-labelledby="industries-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">Who we serve</span>
-              <h2 className="section-title">We speak your language</h2>
+              <h2 className="section-title" id="industries-heading">We speak your language</h2>
               <p className="section-sub">
                 We only work with home service businesses — not agencies that dabble
                 in everything. We know your trade, your customer, and your market.
               </p>
             </div>
 
-            <div className="industries-grid">
+            <div className="industries-grid" role="list">
               {INDUSTRIES.map((industry) => {
                 const Icon = industry.icon
                 return (
-                  <div key={industry.label} className="industry-card">
-                    <div className="industry-icon">
+                  <a
+                    key={industry.label}
+                    href="#contact"
+                    className="industry-card"
+                    role="listitem"
+                    aria-label={`${industry.label} — ${industry.stat}. Click to get a free audit.`}
+                  >
+                    <div className="industry-icon" aria-hidden="true">
                       <Icon size={22} />
                     </div>
                     <span className="industry-name">{industry.label}</span>
                     <span className="industry-stat">{industry.stat}</span>
-                  </div>
+                  </a>
                 )
               })}
             </div>
@@ -371,11 +392,11 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── CASE STUDIES ── */}
-        <section className="agency-section" id="results">
+        <section className="agency-section" id="results" aria-labelledby="results-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">Proof</span>
-              <h2 className="section-title">
+              <h2 className="section-title" id="results-heading">
                 Real results.<br />Named clients.<br />Specific numbers.
               </h2>
               <p className="section-sub">
@@ -386,17 +407,19 @@ export default function AgencyHomePage() {
 
             <div className="case-studies-grid">
               {CASE_STUDIES.map((study) => (
-                <div key={study.client} className="case-study-card">
+                <article key={study.client} className="case-study-card">
                   <div className="case-study-header">
                     <div className="case-study-client">{study.client}</div>
                     <div className="case-study-location">{study.location}</div>
                     <span className="case-study-service-tag">{study.service}</span>
                   </div>
 
-                  <div className="case-study-metrics">
+                  <div className="case-study-metrics" role="list" aria-label={`Results for ${study.client}`}>
                     {study.metrics.map((metric) => (
-                      <div key={metric.label} className="case-study-metric">
-                        <span className="metric-value">{metric.value}</span>
+                      <div key={metric.label} className="case-study-metric" role="listitem">
+                        <span className="metric-value" aria-label={`${metric.value} ${metric.label}`}>
+                          {metric.value}
+                        </span>
                         <span className="metric-label">{metric.label}</span>
                       </div>
                     ))}
@@ -406,18 +429,20 @@ export default function AgencyHomePage() {
                     {study.quote}
                     <cite className="case-study-author">{study.author}</cite>
                   </blockquote>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
         {/* ── PORTFOLIO — Work We've Done ── */}
-        <section className="agency-section" id="portfolio">
+        <section className="agency-section" id="portfolio" aria-labelledby="portfolio-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">Our work</span>
-              <h2 className="section-title">Built for real businesses.<br />Proven in the field.</h2>
+              <h2 className="section-title" id="portfolio-heading">
+                Built for real businesses.<br />Proven in the field.
+              </h2>
               <p className="section-sub">
                 Click or hover each card to explore a project.
                 Every one is a named client, a named city, and a number we can stand behind.
@@ -428,21 +453,21 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── PROCESS ── */}
-        <section className="agency-section--soft" id="how-it-works">
+        <section className="agency-section--soft" id="how-it-works" aria-labelledby="process-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">How it works</span>
-              <h2 className="section-title">From audit to revenue in 21 days</h2>
+              <h2 className="section-title" id="process-heading">From audit to revenue in 21 days</h2>
               <p className="section-sub">
                 A clear, repeatable path from where you are to where you want to be —
                 with milestones you can hold us to.
               </p>
             </div>
 
-            <div className="process-grid">
+            <div className="process-grid" role="list">
               {PROCESS_STEPS.map((step) => (
-                <div key={step.number} className="process-step">
-                  <div className="process-number">{step.number}</div>
+                <div key={step.number} className="process-step" role="listitem">
+                  <div className="process-number" aria-hidden="true">{step.number}</div>
                   <h3 className="process-step-title">{step.title}</h3>
                   <p className="process-step-desc">{step.desc}</p>
                 </div>
@@ -452,11 +477,11 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── PRICING ── */}
-        <section className="agency-section" id="pricing">
+        <section className="agency-section" id="pricing" aria-labelledby="pricing-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">Transparent pricing</span>
-              <h2 className="section-title">
+              <h2 className="section-title" id="pricing-heading">
                 Simple pricing.<br />No surprises.
               </h2>
               <p className="section-sub">
@@ -465,11 +490,12 @@ export default function AgencyHomePage() {
               </p>
             </div>
 
-            <div className="pricing-grid">
+            <div className="pricing-grid" role="list">
               {PRICING.map((tier) => (
                 <div
                   key={tier.name}
                   className={tier.featured ? 'pricing-card pricing-card--featured' : 'pricing-card'}
+                  role="listitem"
                 >
                   {tier.featured && (
                     <span className="pricing-featured-badge">Most Popular</span>
@@ -483,12 +509,12 @@ export default function AgencyHomePage() {
                     </div>
                   </div>
 
-                  <div className="pricing-divider" />
+                  <div className="pricing-divider" aria-hidden="true" />
 
-                  <ul className="pricing-features">
+                  <ul className="pricing-features" aria-label={`${tier.name} features`}>
                     {tier.features.map((feature) => (
                       <li key={feature} className="pricing-feature">
-                        <span className="pricing-feature-check">
+                        <span className="pricing-feature-check" aria-hidden="true">
                           <CheckCircle size={11} />
                         </span>
                         {feature}
@@ -499,9 +525,10 @@ export default function AgencyHomePage() {
                   <a
                     href={tier.ctaHref}
                     className={tier.featured ? 'agency-btn-white' : 'agency-btn-primary'}
+                    aria-label={`${tier.cta} — ${tier.name}`}
                   >
                     {tier.cta}
-                    <ArrowRight size={14} />
+                    <ArrowRight size={14} aria-hidden="true" />
                   </a>
                 </div>
               ))}
@@ -510,65 +537,94 @@ export default function AgencyHomePage() {
         </section>
 
         {/* ── TESTIMONIALS ── */}
-        <section className="agency-section--soft">
+        <section className="agency-section--soft" aria-labelledby="testimonials-heading">
           <div className="agency-container">
             <div className="section-header">
               <span className="section-label">What clients say</span>
-              <h2 className="section-title">114 verified reviews. Not 4.</h2>
+              <h2 className="section-title" id="testimonials-heading">114 verified reviews. Not 4.</h2>
               <p className="section-sub">
                 Review volume is a trust signal. A 5-star rating with 8 reviews means
                 almost nothing. This is how we earn it — one campaign at a time.
               </p>
             </div>
 
-            <div className="testimonials-grid">
+            <div className="testimonials-grid" role="list">
               {TESTIMONIALS.map((t) => (
-                <div key={t.name} className="testimonial-card">
-                  <div className="testimonial-stars">★★★★★</div>
+                <article key={t.name} className="testimonial-card" role="listitem">
+                  <StarRating />
                   <p className="testimonial-quote">{t.quote}</p>
                   <div className="testimonial-author">
                     <span className="testimonial-name">{t.name}</span>
                     <span className="testimonial-role">{t.role} · {t.location}</span>
                   </div>
-                </div>
+                </article>
               ))}
             </div>
           </div>
         </section>
 
-        {/* ── EXCLUSIVITY CTA ── */}
-        <section className="exclusivity-section" id="contact">
+        {/* ── CONTACT / EXCLUSIVITY CTA ── */}
+        <section className="exclusivity-section" id="contact" aria-labelledby="contact-heading">
           <div className="exclusivity-inner">
-            <div className="scorecard-strip">
+
+            {/* Scorecard */}
+            <div className="scorecard-strip" role="list" aria-label="Why choose Forma">
               {SCORECARD_POINTS.map((point) => (
-                <span key={point} className="scorecard-item">
-                  <span className="scorecard-check">✓</span>
+                <span key={point} className="scorecard-item" role="listitem">
+                  <span className="scorecard-check" aria-hidden="true">✓</span>
                   {point}
                 </span>
               ))}
             </div>
 
-            <h2 className="exclusivity-headline">
-              One plumber.<br />
-              One HVAC.<br />
-              One roofer.<br />
-              Per city.
-            </h2>
+            {/* Trust badges */}
+            <div className="trust-badges" role="list" aria-label="Certifications and awards">
+              <span className="trust-badge" role="listitem">
+                <span className="trust-badge-star" aria-hidden="true">
+                  <StarRating />
+                </span>
+                4.9 · 114 Clutch Reviews
+              </span>
+              <span className="trust-badge" role="listitem">
+                <BadgeCheck size={16} className="trust-badge-check" aria-hidden="true" />
+                Google Partner Agency
+              </span>
+              <span className="trust-badge" role="listitem">
+                <Award size={16} className="trust-badge-check" aria-hidden="true" />
+                Clutch Top Agency 2024
+              </span>
+              <span className="trust-badge" role="listitem">
+                <ShieldCheck size={16} className="trust-badge-check" aria-hidden="true" />
+                ROI Guarantee
+              </span>
+            </div>
 
-            <p className="exclusivity-sub">
-              We turn away your competitors once a trade is taken in your city.
-              That&apos;s our commitment to your results — and our rarest offering.
-              If your competitor isn&apos;t already working with us, that spot is still open.
-            </p>
+            {/* Two-column: headline + form */}
+            <div className="contact-layout">
+              <div>
+                <h2 className="exclusivity-headline" id="contact-heading">
+                  One plumber.<br />
+                  One HVAC.<br />
+                  One roofer.<br />
+                  Per city.
+                </h2>
 
-            <div className="exclusivity-actions">
-              <a href="tel:+15125550190" className="agency-btn-white">
-                <Phone size={16} />
-                (512) 555-0190
-              </a>
-              <a href="mailto:hello@formadigital.co" className="agency-btn-secondary" style={{ borderColor: 'rgba(255,255,255,0.2)', color: 'rgba(255,255,255,0.75)' }}>
-                hello@formadigital.co
-              </a>
+                <p className="exclusivity-sub">
+                  We turn away your competitors once a trade is taken in your city.
+                  That&apos;s our commitment to your results — and our rarest offering.
+                  If your competitor isn&apos;t already working with us, that spot is still open.
+                </p>
+
+                <a href="tel:+15125550190" className="agency-btn-white">
+                  <Phone size={16} aria-hidden="true" />
+                  (512) 555-0190
+                </a>
+              </div>
+
+              <div className="contact-form-wrap">
+                <p className="contact-form-title">Claim your free growth audit</p>
+                <LeadForm />
+              </div>
             </div>
 
             <p className="exclusivity-note">

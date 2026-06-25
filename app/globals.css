@@ -32,6 +32,17 @@
   --color-clay-peach: #ffb084;
   --color-clay-ochre: #e8b94a;
   --color-clay-mint: #a4d4c5;
+
+  /* ── UI/UX Pro Max — Trust & Authority + Conversion variables ── */
+  --badge-height: 48px;
+  --input-height: 48px;
+  --star-color: #e8b94a;
+  --security-green: #059669;
+  --metric-highlight: #e8b94a;
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 4px 16px rgba(0, 0, 0, 0.04);
+  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.08), 0 16px 40px rgba(0, 0, 0, 0.06);
+  --shadow-btn: 0 4px 14px rgba(0, 0, 0, 0.14);
+  --shadow-btn-pink: 0 6px 20px rgba(255, 77, 139, 0.30);
 }
 
 /* ─── Base typography (Pocket Heist dashboard) ─── */
@@ -48,6 +59,47 @@ h1, h2, h3, h4 {
 }
 svg.logo {
   display: inline-block;
+}
+
+/* ─── Accessibility: skip link ─── */
+.skip-link {
+  position: absolute;
+  top: -52px;
+  left: 16px;
+  z-index: 10000;
+  background-color: var(--color-clay-pink);
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 0 0 12px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: top 0.15s ease;
+}
+.skip-link:focus {
+  top: 0;
+}
+
+/* ─── Accessibility: prefers-reduced-motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ─── Accessibility: global focus-visible for agency ─── */
+.agency-page a:focus-visible,
+.agency-page button:focus-visible,
+.agency-page [tabindex]:focus-visible,
+.agency-nav-focus:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
+  border-radius: 4px;
 }
 .page-content {
   @apply my-4 mx-auto w-6xl min-w-2xl max-w-full;
@@ -149,13 +201,18 @@ svg.logo {
   padding: 14px 28px;
   border-radius: 100px;
   text-decoration: none;
-  transition: background-color 0.15s, transform 0.15s;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
   border: none;
 }
 .agency-btn-primary:hover {
   background-color: #1a1a1a;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn);
+}
+.agency-btn-primary:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 .agency-btn-secondary {
   display: inline-flex;
@@ -169,12 +226,16 @@ svg.logo {
   border-radius: 100px;
   border: 1.5px solid var(--color-clay-hairline);
   text-decoration: none;
-  transition: border-color 0.15s, background-color 0.15s;
+  transition: border-color 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
   cursor: pointer;
 }
 .agency-btn-secondary:hover {
   border-color: var(--color-clay-ink);
   background-color: var(--color-clay-card);
+  transform: translateY(-1px);
+}
+.agency-btn-secondary:active {
+  transform: translateY(0);
 }
 .agency-btn-white {
   display: inline-flex;
@@ -187,13 +248,18 @@ svg.logo {
   padding: 14px 28px;
   border-radius: 100px;
   text-decoration: none;
-  transition: background-color 0.15s, transform 0.15s;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
   cursor: pointer;
   border: none;
 }
 .agency-btn-white:hover {
   background-color: var(--color-clay-canvas);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+}
+.agency-btn-white:active {
+  transform: translateY(0);
+  box-shadow: none;
 }
 .btn-text-link {
   display: inline-flex;
@@ -403,10 +469,12 @@ svg.logo {
   @apply flex flex-col gap-4;
   padding: 36px 32px 40px;
   border-radius: 20px;
-  transition: transform 0.2s;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  cursor: default;
 }
 .feature-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-card-hover);
 }
 .feature-card-icon {
   @apply flex items-center justify-center;
@@ -490,11 +558,13 @@ svg.logo {
   border: 1px solid var(--color-clay-hairline);
   border-radius: 16px;
   padding: 28px 16px;
-  transition: box-shadow 0.2s, transform 0.2s;
+  transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
+  cursor: pointer;
 }
 .industry-card:hover {
-  box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-  transform: translateY(-3px);
+  box-shadow: var(--shadow-card-hover);
+  border-color: var(--color-clay-hairline);
+  transform: translateY(-4px);
 }
 .industry-icon {
   @apply flex items-center justify-center;
@@ -653,10 +723,12 @@ svg.logo {
   border: 1.5px solid var(--color-clay-hairline);
   border-radius: 20px;
   padding: 36px 32px;
-  transition: box-shadow 0.2s;
+  transition: box-shadow 0.22s ease, transform 0.22s ease, border-color 0.22s ease;
 }
 .pricing-card:hover {
-  box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
+  border-color: rgba(229, 229, 229, 0.4);
 }
 .pricing-card--featured {
   background-color: var(--color-clay-teal);
@@ -758,6 +830,11 @@ svg.logo {
   border: 1px solid var(--color-clay-hairline);
   border-radius: 20px;
   padding: 36px 32px;
+  transition: box-shadow 0.22s ease, transform 0.22s ease;
+}
+.testimonial-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-3px);
 }
 .testimonial-stars {
   @apply flex gap-1;
@@ -859,4 +936,249 @@ svg.logo {
   color: var(--color-clay-teal);
   font-weight: 700;
   font-size: 16px;
+}
+
+/* ─── TRUST BADGES (certification row) ─── */
+.trust-badges {
+  @apply flex flex-wrap gap-3 justify-center;
+  margin-bottom: 48px;
+}
+.trust-badge {
+  @apply flex items-center gap-2;
+  height: var(--badge-height);
+  padding: 0 20px;
+  background-color: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.8);
+  white-space: nowrap;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+.trust-badge:hover {
+  background-color: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.22);
+}
+.trust-badge-star {
+  color: var(--star-color);
+}
+.trust-badge-check {
+  color: var(--security-green);
+}
+
+/* ─── CONTACT / LEAD FORM SECTION ─── */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  text-align: left;
+  margin-top: 0;
+}
+@media (min-width: 920px) {
+  .contact-layout {
+    grid-template-columns: 1fr 1fr;
+    gap: 72px;
+    align-items: start;
+  }
+  .exclusivity-section {
+    text-align: left;
+  }
+}
+
+.contact-form-wrap {
+  background-color: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 24px;
+  padding: 40px 36px;
+  backdrop-filter: blur(8px);
+}
+@media (max-width: 640px) {
+  .contact-form-wrap {
+    padding: 28px 20px;
+  }
+}
+
+.contact-form-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 24px;
+  letter-spacing: -0.5px;
+}
+
+/* ─── LEAD FORM INPUT SYSTEM ─── */
+.lead-form {
+  @apply flex flex-col gap-4;
+}
+.lead-form-row {
+  @apply flex gap-4;
+}
+@media (max-width: 640px) {
+  .lead-form-row {
+    @apply flex-col;
+  }
+}
+.lead-form-group {
+  @apply flex flex-col gap-2;
+  flex: 1;
+}
+.lead-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+}
+.lead-form-input {
+  width: 100%;
+  height: var(--input-height);
+  padding: 0 16px;
+  background-color: rgba(255,255,255,0.07);
+  border: 1.5px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: var(--font-sans);
+  color: #fff;
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  appearance: none;
+  -webkit-appearance: none;
+}
+.lead-form-input::placeholder {
+  color: rgba(255,255,255,0.28);
+}
+.lead-form-input:focus {
+  outline: none;
+  border-color: rgba(255,255,255,0.45);
+  background-color: rgba(255,255,255,0.10);
+  box-shadow: 0 0 0 3px rgba(255,255,255,0.08);
+}
+.lead-form-input option {
+  background-color: var(--color-clay-dark);
+  color: #fff;
+}
+.lead-form-submit {
+  @apply flex items-center justify-center gap-2;
+  height: 52px;
+  background-color: var(--color-clay-pink);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 700;
+  font-family: var(--font-sans);
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  margin-top: 4px;
+  width: 100%;
+}
+.lead-form-submit:hover {
+  background-color: #e0306a;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-btn-pink);
+}
+.lead-form-submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.lead-form-submit:focus-visible {
+  outline: 3px solid rgba(255,255,255,0.7);
+  outline-offset: 3px;
+}
+.lead-form-submit:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+.lead-form-note {
+  @apply flex items-center justify-center gap-1;
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  margin-top: -4px;
+}
+.lead-form-success {
+  @apply flex flex-col items-center gap-4;
+  padding: 48px 16px;
+  text-align: center;
+  color: var(--color-clay-mint);
+}
+.lead-form-success-title {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+}
+.lead-form-success-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.6);
+  line-height: 1.6;
+  max-width: 340px;
+}
+
+/* ─── STAR RATING (SVG, not emoji) ─── */
+.star-row {
+  @apply flex gap-0.5 items-center;
+  color: var(--star-color);
+}
+
+/* ─── CASE STUDY metric count-up ─── */
+.metric-value {
+  font-family: var(--font-display);
+  font-size: 26px;
+  font-weight: 800;
+  color: var(--color-clay-ink);
+  line-height: 1;
+  transition: color 0.3s ease;
+}
+.metric-value.metric-highlighted {
+  color: var(--color-clay-pink);
+}
+
+/* ─── 375px mobile polish ─── */
+@media (max-width: 375px) {
+  .agency-container {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  .hero-section {
+    padding-top: 100px;
+    padding-bottom: 64px;
+  }
+  .hero-headline {
+    font-size: 40px;
+    letter-spacing: -2px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .section-title {
+    font-size: 36px;
+    letter-spacing: -1px;
+  }
+  .agency-section,
+  .agency-section--soft {
+    padding-top: 64px;
+    padding-bottom: 64px;
+  }
+  .exclusivity-headline {
+    font-size: 32px;
+  }
+}
+
+/* ─── Heading accent — section-title pink underscore ─── */
+.section-title--accent {
+  position: relative;
+  display: inline-block;
+}
+.section-title--accent::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--color-clay-pink);
+  margin-top: 12px;
 }

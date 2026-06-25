@@ -59,46 +59,127 @@
   font-weight: 500;
   color: var(--color-clay-muted);
   text-decoration: none;
-  transition: color 0.15s;
+  transition: color 0.15s ease;
+  padding: 4px 2px;
 }
 
 .link:hover {
   color: var(--color-clay-ink);
 }
 
-.cta {
+.link:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
+  border-radius: 4px;
+  color: var(--color-clay-ink);
+}
+
+/* ── Right side cluster ── */
+.navRight {
   display: none;
+  align-items: center;
+  gap: 16px;
 }
 
 @media (min-width: 640px) {
-  .cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background-color: var(--color-clay-ink);
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 100px;
-    text-decoration: none;
-    transition: background-color 0.15s, transform 0.15s;
+  .navRight {
+    display: flex;
   }
+}
+
+.phone {
+  display: none;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-clay-muted);
+  text-decoration: none;
+  transition: color 0.15s ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 1024px) {
+  .phone {
+    display: flex;
+  }
+}
+
+.phone:hover {
+  color: var(--color-clay-ink);
+}
+
+.phone:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background-color: var(--color-clay-ink);
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: background-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  white-space: nowrap;
 }
 
 .cta:hover {
   background-color: #1a1a1a;
   transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.14);
 }
 
+.cta:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.cta:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
+}
+
+/* ── Mobile cluster ── */
 .mobileAudit {
   display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 @media (min-width: 640px) {
   .mobileAudit {
     display: none;
   }
+}
+
+.mobilePhone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1.5px solid var(--color-clay-hairline);
+  color: var(--color-clay-ink);
+  text-decoration: none;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.mobilePhone:hover {
+  border-color: var(--color-clay-ink);
+  background-color: var(--color-clay-card);
+}
+
+.mobilePhone:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
 }
 
 .mobileAuditLink {
@@ -109,4 +190,15 @@
   padding: 8px 14px;
   border: 1.5px solid var(--color-clay-hairline);
   border-radius: 100px;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+}
+
+.mobileAuditLink:hover {
+  border-color: var(--color-clay-ink);
+  background-color: var(--color-clay-card);
+}
+
+.mobileAuditLink:focus-visible {
+  outline: 3px solid var(--color-clay-pink);
+  outline-offset: 3px;
 }
